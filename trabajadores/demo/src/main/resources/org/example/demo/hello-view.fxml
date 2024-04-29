@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="189.0" layoutY="28.0" text="Label" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="103.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Nuevo-Logo-PcComponentes.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="73.0" fitWidth="66.0" layoutX="23.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../eps10-black-login-icon-or-logo-in-simple-flat-trendy-modern-style-isolated-on-white-background-free-vector.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="139.0" layoutY="273.0" text="Label" />
+      <PasswordField layoutX="128.0" layoutY="389.0" />
+      <Label layoutX="139.0" layoutY="352.0" text="Label" />
+      <TextField layoutX="129.0" layoutY="311.0" />
+      <Button layoutX="176.0" layoutY="459.0" mnemonicParsing="false" text="Login" />
+      <Label layoutX="42.0" layoutY="241.0" text="Label" />
+
+      <CheckBox layoutX="128.0" layoutY="428.0" mnemonicParsing="false" text="Recordar Usuario" />
+
+   </children>
+</Pane>
