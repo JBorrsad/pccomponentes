@@ -124,6 +124,50 @@ public class MYSQL {
     }
 
 
+    public static void eliminarProducto(int idProducto) {
+        String sql = "DELETE FROM PRODUCTOS WHERE ID_DISPOSITIVO = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setInt(1, idProducto);
+
+            int filasEliminadas = statement.executeUpdate();
+            if (filasEliminadas > 0) {
+                System.out.println("Producto eliminado correctamente.");
+            } else {
+                System.out.println("No se pudo eliminar el producto. Es posible que el producto no exista en la base de datos.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar el producto: " + e.getMessage());
+        }
+    }
+
+
+    //eliminar producto pero sin sout's, para utilizarlo en otros metodos
+
+    public static void eliminarProductosilencio(int idProducto) {
+        String sql = "DELETE FROM PRODUCTOS WHERE ID_DISPOSITIVO = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setInt(1, idProducto);
+
+            int filasEliminadas = statement.executeUpdate();
+
+    } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }}
+
+        //el producto que hay que restar y cuantos de ellos quieres quitar del stock
+
+    public void restarstock(Producto p,int n) {
+        eliminarProductosilencio(p.getID_DISPOSITIVO());
+        añadirProducto(p.getNOMBRE(),p.getSTOCK()-n,p.getPRECI0());
+    }
+
+
 }
 
 
