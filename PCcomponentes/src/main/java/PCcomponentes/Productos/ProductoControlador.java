@@ -1,8 +1,4 @@
 package PCcomponentes.Productos;
-
-
-
-
 import PCcomponentes.MYSQL;
 import PCcomponentes.Producto;
 import javafx.fxml.FXML;
@@ -14,6 +10,7 @@ import java.util.ArrayList;
 public class ProductoControlador {
     @FXML
     private TableView tablaproductos;
+    @FXML
     private Button añadir;
     @FXML
     private Button eliminar;
@@ -32,7 +29,7 @@ public class ProductoControlador {
 
     @FXML void eliminar() {}
 
-    @FXML void añadirproducto(String nombre, int stock, int precio)
+    @FXML void añadirstock(String nombre, int stock, int precio)
     {
         MYSQL.añadirProducto(nombre, stock, precio);
         refrescar();
