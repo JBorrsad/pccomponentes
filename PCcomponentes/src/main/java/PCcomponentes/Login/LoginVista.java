@@ -1,7 +1,7 @@
-package PCcomponentes.Productos;
+package PCcomponentes.Login;
 
 
-import PCcomponentes.MYSQL;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,14 +18,13 @@ public class LoginVista extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        MYSQL.getUsuariosSQL();
-        MYSQL.getDispositivosSQL();
+
         try {
             // Loading the FXML file and displaying the JavaFX scene
-            FXMLLoader fxmlLoader = new FXMLLoader(LoginVista.class.getResource("login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginVista.class.getResource("/login.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 400, 500);
             stage.setResizable(false);
-            stage.setTitle("Productos");
+            stage.setTitle("Hello!");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

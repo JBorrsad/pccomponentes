@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Login.LoginControlador">
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="103.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -21,8 +21,5 @@
       <Label layoutX="139.0" layoutY="352.0" text="Contraseña" />
       <TextField fx:id="loginNombre" layoutX="129.0" layoutY="311.0" />
       <Button fx:id="botonLogin" layoutX="176.0" layoutY="459.0" mnemonicParsing="false" text="Login" />
-
-      <CheckBox fx:id="checkBoxUsario" layoutX="128.0" layoutY="428.0" mnemonicParsing="false" text="Recordar Usuario" />
-
    </children>
 </Pane>
