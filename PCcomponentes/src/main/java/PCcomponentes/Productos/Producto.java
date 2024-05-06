@@ -7,15 +7,15 @@ public class Producto {
     private int ID_DISPOSITIVO;
     private String NOMBRE;
     private int STOCK;
-    private int PRECI0;
+    private int PRECIO;
 
 
 
-    public Producto(int ID_DISPOSITIVO, String NOMBRE, int STOCK, int PRECI0) {
+    public Producto(int ID_DISPOSITIVO, String NOMBRE, int STOCK, int PRECIO) {
         this.ID_DISPOSITIVO = ID_DISPOSITIVO;
         this.NOMBRE = NOMBRE;
         this.STOCK = STOCK;
-        this.PRECI0 = PRECI0;
+        this.PRECIO = PRECIO;
     }
 
 
@@ -46,12 +46,12 @@ public class Producto {
         this.STOCK = STOCK;
     }
 
-    public int getPRECI0() {
-        return PRECI0;
+    public int getPRECIO() {
+        return PRECIO;
     }
 
-    public void setPRECI0(int PRECI0) {
-        this.PRECI0 = PRECI0;
+    public void setPRECIO(int PRECIO) {
+        this.PRECIO = PRECIO;
     }
 
 

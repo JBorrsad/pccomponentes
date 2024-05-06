@@ -3,18 +3,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="441.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.ProductoController">
+
+
+<AnchorPane prefHeight="441.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Productos.ProductoControlador">
    <children>
       <TableView fx:id="tablaproductos" layoutX="26.0" layoutY="38.0" prefHeight="327.0" prefWidth="600.0">
         <columns>
-          <TableColumn prefWidth="150.0" text="ID" />
-            <TableColumn prefWidth="150.0" text="Nombre" />
-            <TableColumn prefWidth="150.0" text="Stock" />
-            <TableColumn prefWidth="150.0" text="Precio" />
+          <TableColumn fx:id="IDTABLA" prefWidth="150.0" text="ID" />
+            <TableColumn fx:id="NOMBRETABLA" prefWidth="150.0" text="Nombre" />
+            <TableColumn fx:id="STOCKTABLA" prefWidth="150.0" text="Stock" />
+            <TableColumn fx:id="PRECIOTABLA" prefWidth="150.0" text="Precio" />
         </columns>
       </TableView>
       <Button fx:id="refrescar" layoutX="71.0" layoutY="385.0" mnemonicParsing="false" onAction="#refrescar" text="refrescar" />
-       <Button fx:id="añadirstock" layoutX="150.0" layoutY="385.0" mnemonicParsing="false" onAction="#añadirstock" text="añadir stock" />
+       <Button fx:id="añadirstock" layoutX="150.0" layoutY="385.0" mnemonicParsing="false" onAction="#anadirproducto" text="añadir stock" />
        <Button fx:id="eliminar" layoutX="300.0" layoutY="385.0" mnemonicParsing="false" onAction="#eliminar" text="eliminar" />
 
 

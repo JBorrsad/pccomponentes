@@ -26,7 +26,7 @@ public class LoginControlador {
     Button botonLogin;
     ArrayList<Usuario> usuarios= new ArrayList<>();
 
-    public void login(ActionEvent event) {
+    public void login(ActionEvent event) throws PermisosInsuficientesException {
         String username = loginNombre.getText().trim();
         String password = loginContraseña.getText().trim();
 
@@ -34,6 +34,9 @@ public class LoginControlador {
         if (MYSQL.checkusuario(username, password)) {
             Usuario usuario = MYSQL.getUsuariosSQL(username,password);
             String rol = usuario.getROL();
+            if (!rol.equals("CLIENTE") && !rol.equals("PROVEEDOR")) {
+                throw new PermisosInsuficientesException("El usuario no tiene permisos para acceder a la aplicación.");
+            }
             // Lógica para cambiar de escena según el rol
             changeScene(rol);
         } else {
@@ -50,7 +53,13 @@ public class LoginControlador {
 
 
     public void initialize() {
-        botonLogin.setOnAction(this::login);
+        botonLogin.setOnAction(event -> {
+            try {
+                login(event);
+            } catch (PermisosInsuficientesException e) {
+                showAlert("Error", e.getMessage());
+            }
+        });
     }
 
     private void changeScene(String rol) {
@@ -62,7 +71,7 @@ public class LoginControlador {
 
         // Abrir la pantalla de productos
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("productos.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/productos.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);

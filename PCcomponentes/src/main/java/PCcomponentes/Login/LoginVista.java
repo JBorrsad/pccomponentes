@@ -24,7 +24,7 @@ public class LoginVista extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(LoginVista.class.getResource("/login.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 400, 500);
             stage.setResizable(false);
-            stage.setTitle("Hello!");
+            stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
