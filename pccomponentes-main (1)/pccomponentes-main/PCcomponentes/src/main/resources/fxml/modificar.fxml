@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="PCcomponentes.Productos.ModificarControlador">
+    <Label text="Modificar Producto"/>
+    <Label text="Nombre:"/>
+    <TextField fx:id="nombreField"/>
+    <Label text="Precio:"/>
+    <TextField fx:id="precioField"/>
+    <Label text="Stock:"/>
+    <TextField fx:id="stockField"/>
+    <Button text="Guardar" onAction="#guardarCambios"/>
+    <Button text="Cancelar" onAction="#cancelar"/>
+</VBox>
+
