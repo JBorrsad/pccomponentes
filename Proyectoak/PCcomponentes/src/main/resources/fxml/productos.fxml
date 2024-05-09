@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="441.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Productos.ProductoControlador">
+   <children>
+      <TableView fx:id="tablaproductos" layoutX="26.0" layoutY="38.0" prefHeight="334.0" prefWidth="290.0">
+        <columns>
+          <TableColumn fx:id="IDTABLA" prefWidth="25.0" text="ID" />
+            <TableColumn fx:id="NOMBRETABLA" prefWidth="25.0" text="Nombre" />
+            <TableColumn fx:id="STOCKTABLA" prefWidth="25.0" text="Stock" />
+            <TableColumn fx:id="PRECIOTABLA" prefWidth="25.0" text="Precio" />
+        </columns>
+      </TableView>
+      <Button fx:id="refrescar" layoutX="39.0" layoutY="2.0" mnemonicParsing="false" onAction="#refrescar" prefHeight="25.0" prefWidth="37.0" text="↺">
+         <font>
+            <Font name="Inter Regular" size="15.0" />
+         </font></Button>
+       <Button fx:id="nuevoproducto" layoutX="205.0" layoutY="385.0" mnemonicParsing="false" text="Nuevo Producto" />
+       <Button fx:id="eliminar" layoutX="589.0" layoutY="2.0" mnemonicParsing="false" onAction="#eliminar" text="eliminar" />
+      <Button fx:id="modificar" layoutX="345.0" layoutY="385.0" mnemonicParsing="false" onAction="#abrirVentanaModificar" text="modificar" />
+   </children>
+</AnchorPane>
