@@ -70,8 +70,9 @@ public class ProductoClienteControlador {
         TableColumn<PCcomponentes.Producto, String> nombreColumna = new TableColumn<>("Nombre");
         nombreColumna.setCellValueFactory(new PropertyValueFactory<>("NOMBRE"));
 
-        TableColumn<PCcomponentes.Producto, Integer> stockColumna = new TableColumn<>("Stock");
-        stockColumna.setCellValueFactory(new PropertyValueFactory<>("STOCK"));
+        TableColumn<PCcomponentes.Producto, Integer> stockColumnaC = new TableColumn<>("Stock");
+        stockColumnaC.setCellValueFactory(new PropertyValueFactory<>("STOCK"));
+        ProductoControlador.amarillo(stockColumnaC);
 
         TableColumn<PCcomponentes.Producto, Double> precioColumna = new TableColumn<>("Precio");
         precioColumna.setCellValueFactory(new PropertyValueFactory<>("PRECIO"));
@@ -79,7 +80,7 @@ public class ProductoClienteControlador {
         NombreProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         Cantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
 
-        tablaproductos.getColumns().addAll(idColumna, nombreColumna, stockColumna, precioColumna);
+        tablaproductos.getColumns().addAll(idColumna, nombreColumna, stockColumnaC, precioColumna);
         tablaproductos.setItems(listaObservable);
     }
 

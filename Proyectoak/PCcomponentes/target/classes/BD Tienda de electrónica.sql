@@ -1,12 +1,23 @@
 CREATE DATABASE tiendaElectronica;
 USE tiendaElectronica;
+DROP DATABASE tiendaElectronica;
 
 CREATE TABLE USUARIOS (
                           ID INT PRIMARY KEY AUTO_INCREMENT,
                           NOMBRE varchar(30),
                           CONTRASEÑA varchar(20),
-                          ROL ENUM ("PROVEEDOR", "CLIENTE")
-);
+                          ROL ENUM ("PROVEEDOR", "CLIENTE"),
+                          PAGONOMBRE varchar(30),
+                          PAGOAPELLIDO varchar(30),
+                          CP NUMERIC,
+                          PROVINCIA varchar(50),
+                          LOCALIDAD varchar(50),
+                          DIRECCION varchar(100),
+                          CUENTABANCO VARCHAR(24)
+                          
+				);
+
+
 
 
 
@@ -15,25 +26,26 @@ CREATE TABLE PRODUCTOS (
                            NOMBRE VARCHAR(50),
                            STOCK INT,
                            PRECIO DOUBLE
+                           
 );
+
+
+CREATE TABLE PEDIDOS (
+
+		ID INT PRIMARY KEY AUTO_INCREMENT,
+		PEDIDO VARCHAR(255) NOT NULL,
+		NOMBRE varchar(30),
+		APELLIDO varchar(30),
+		DIRECCION varchar(100),
+		 CUENTABANCO VARCHAR(24)
+
+);
+
 
 INSERT INTO USUARIOS (ID, NOMBRE, CONTRASEÑA, ROL) VALUES
                                                        (1, '1', '1', 'PROVEEDOR'),
-                                                       (2, 'iñigo', 'casa28', 'CLIENTE'),
-                                                       (3, 'martin', 'luz13', 'PROVEEDOR'),
-                                                       (4, 'juan', 'agua09', 'CLIENTE'),
-                                                       (5, 'dani', 'amigo42', 'PROVEEDOR'),
-                                                       (6, 'alex', 'juego77', 'CLIENTE'),
-                                                       (7, 'eider', 'coche66', 'PROVEEDOR'),
-                                                       (8, 'javi', 'hola91', 'CLIENTE'),
-                                                       (9, 'aaron', 'perro03', 'PROVEEDOR'),
-                                                       (10, 'fermin', 'flor88', 'CLIENTE'),
-                                                       (11, 'ivan', 'mundo05', 'PROVEEDOR'),
-                                                       (12, 'ioritz', 'mar44', 'CLIENTE'),
-                                                       (13, 'nidae', 'sol52', 'PROVEEDOR'),
-                                                       (14, 'matias', 'sal99', 'CLIENTE'),
-                                                       (15, 'moha', 'luna17', 'PROVEEDOR'),
-                                                       (16, 'sebastian', 'cama71', 'CLIENTE');
+                                                        (2, '2', '2', 'CLIENTE');
+                                                    
 
 
 INSERT INTO PRODUCTOS (ID, NOMBRE, STOCK, PRECIO) VALUES

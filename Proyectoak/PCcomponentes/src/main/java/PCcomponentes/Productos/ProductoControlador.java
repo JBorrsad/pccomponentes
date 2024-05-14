@@ -95,7 +95,7 @@ public class ProductoControlador {
     }
 
 
-    public void amarillo(TableColumn<Producto, Integer> stockColumna) {
+    public static void amarillo(TableColumn<Producto, Integer> stockColumna) {
         stockColumna.setCellFactory(column -> new TableCell<Producto, Integer>() {
             @Override
             protected void updateItem(Integer item, boolean empty) {

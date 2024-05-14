@@ -48,6 +48,7 @@ public class MYSQL {
         return usuario;
     }
 
+
     public static boolean checkusuario(String nombre, String contraseña) {
         ArrayList<Usuario> usuarios = crearUsuarios();
         boolean resultado = false;
@@ -247,6 +248,10 @@ public class MYSQL {
         }
     }
 
+
+    public static int cookie(){
+
+    }
 
 
 
