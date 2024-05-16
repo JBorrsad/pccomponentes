@@ -1,0 +1,17 @@
+  public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+
+        if (usuario != null) {
+            usernameField.setText(usuario.getUsername());
+            contrasenaField.setText(usuario.getContrasena());
+            rolField.setText(usuario.getRol());
+            pagoNombreField.setText(usuario.getPagoNombre());
+            pagoApellidoField.setText(usuario.getPagoApellido());
+            codigoPostalField.setText(String.valueOf(usuario.getCodigoPostal()));
+            provinciaField.setText(usuario.getProvincia());
+            localidadField.setText(usuario.getLocalidad());
+            direccionField.setText(usuario.getDireccion());
+            cuentaBancoField.setText(usuario.getCuentaBanco());
+            fotoField.setText(usuario.getFoto());
+        }
+    }   para mostrar datos
