@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class MYSQL {
 
+    private static String username;
+
     private static Connection getConnection() {
         String url = "jdbc:mysql://localhost:3306/tiendaelectronica";
         String user = "root";
@@ -23,63 +25,111 @@ public class MYSQL {
         return connection;
     }
 
-    public static Usuario getUsuariosSQL(String username, String password) {
-        Usuario usuario = null;
-        String query = "SELECT * FROM USUARIOS WHERE NOMBRE = ? AND CONTRASEÑA = ?";
+    public static void actualizarUsuario(Usuario usuario) {
+        String sql = "UPDATE USUARIOS SET CONTRASEÑA = ?, ROL = ?, PAGONOMBRE = ?, PAGOAPELLIDO = ?, PROVINCIA = ?, LOCALIDAD = ?, DIRECCION = ?, CP = ?, CUENTABANCO = ?, FOTO = ? WHERE USERNAME = ?";
 
         try (Connection conn = getConnection();
-             PreparedStatement statement = conn.prepareStatement(query)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            statement.setString(1, username);
-            statement.setString(2, password);
-            ResultSet resultSet = statement.executeQuery();
+
+            pstmt.setString(1, usuario.getContrasena());
+            pstmt.setString(2, usuario.getRol());
+            pstmt.setString(3, usuario.getPagoNombre());
+            pstmt.setString(4, usuario.getPagoApellido());
+            pstmt.setString(5, usuario.getProvincia());
+            pstmt.setString(6, usuario.getLocalidad());
+            pstmt.setString(7, usuario.getDireccion());
+            pstmt.setInt(8, usuario.getCodigoPostal());
+            pstmt.setString(9, usuario.getCuentaBanco());
+            pstmt.setString(10, usuario.getFoto());
+            pstmt.setString(11, usuario.getUsername());
+
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar usuario: " + e.getMessage());
+        }
+    }
+
+    public static Usuario getUsuariosSQL(String username) {
+        Usuario usuario = null;
+        String query = "SELECT * FROM USUARIOS WHERE USERNAME = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, username);
+            ResultSet resultSet = pstmt.executeQuery();
 
             if (resultSet.next()) {
-                int id = resultSet.getInt("ID");
-                String nombre = resultSet.getString("NOMBRE");
+                String nombre = resultSet.getString("USERNAME");
                 String contraseña = resultSet.getString("CONTRASEÑA");
                 String rol = resultSet.getString("ROL");
-                usuario = new Usuario(id, nombre, contraseña, rol);
+                String paganombre = resultSet.getString("PAGONOMBRE");
+                String pagaapellido = resultSet.getString("PAGOAPELLIDO");
+                Integer codigopostal = resultSet.getInt("CP");
+                String provincia = resultSet.getString("PROVINCIA");
+                String localidad = resultSet.getString("LOCALIDAD");
+                String direccion = resultSet.getString("DIRECCION");
+                String cuentabanco = resultSet.getString("CUENTABANCO");
+                String foto = resultSet.getString("FOTO");
+                usuario = new Usuario(username,contraseña, rol, paganombre, pagaapellido, codigopostal, provincia, localidad, direccion, cuentabanco, foto);
             }
 
         } catch (SQLException e) {
-            System.err.println("Error retrieving data: " + e.getMessage());
+            System.err.println("Error al obtener usuario: " + e.getMessage());
         }
         return usuario;
     }
 
-
-    public static boolean checkusuario(String nombre, String contraseña) {
-        ArrayList<Usuario> usuarios = crearUsuarios();
+    public static boolean checkusuario(String username, String contraseña) {
+        String query = "SELECT * FROM USUARIOS WHERE USERNAME = ? AND CONTRASEÑA = ?";
         boolean resultado = false;
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getNOMBRE().equals(nombre) && (usuarios.get(i).getCONTRASENA().equals(contraseña))) {
-                resultado = true;
-                break;
-            }
-        }
-        return resultado;
-    }
 
-    public static ArrayList<Usuario> crearUsuarios() {
-        ArrayList<Usuario> resultado = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-        try (Connection C = getConnection(); Statement statement = C.createStatement(); ResultSet resultSet = statement.executeQuery("SELECT * FROM USUARIOS")) {
+            pstmt.setString(1, username);
+            pstmt.setString(2, contraseña);
+            ResultSet resultSet = pstmt.executeQuery();
 
-            while (resultSet.next()) {
-                int ID = resultSet.getInt("ID");
-                String NOMBRE = resultSet.getString("NOMBRE");
-                String CONTRASEÑA = resultSet.getString("CONTRASEÑA");
-                String ROL = resultSet.getString("ROL");
+            resultado = resultSet.next();
 
-                Usuario user = new Usuario(ID, NOMBRE, CONTRASEÑA, ROL);
-                resultado.add(user);
-            }
         } catch (SQLException e) {
-            System.err.println("Error retrieving data: " + e.getMessage());
+            System.err.println("Error al verificar usuario: " + e.getMessage());
         }
         return resultado;
     }
+
+//    public static ArrayList<Usuario> crearUsuarios() {
+//        ArrayList<Usuario> usuarios = new ArrayList<>();
+//        String query = "SELECT * FROM USUARIOS";
+//
+//        try (Connection conn = getConnection();
+//             Statement statement = conn.createStatement();
+//             ResultSet resultSet = statement.executeQuery(query)) {
+//
+//            while (resultSet.next()) {
+//                String username = resultSet.getString("USERNAME");
+//                String contraseña = resultSet.getString("CONTRASEÑA");
+//                String rol = resultSet.getString("ROL");
+//                String paganombre = resultSet.getString("PAGONOMBRE");
+//                String pagaapellido = resultSet.getString("PAGOAPELLIDO");
+//                Integer codigopostal = resultSet.getInt("CP");
+//                String provincia = resultSet.getString("PROVINCIA");
+//                String localidad = resultSet.getString("LOCALIDAD");
+//                String direccion = resultSet.getString("DIRECCION");
+//                String cuentabanco = resultSet.getString("CUENTABANCO");
+//                String foto = resultSet.getString("FOTO");
+//
+//                Usuario usuario = new Usuario(username,contraseña, rol, paganombre, pagaapellido, codigopostal, provincia, localidad, direccion, cuentabanco, foto);
+//                usuarios.add(usuario);
+//            }
+//        } catch (SQLException e) {
+//            System.err.println("Error al obtener usuarios: " + e.getMessage());
+//        }
+//        return usuarios;
+//    }
 
     public static ArrayList<Producto> crearProducto() {
         ArrayList<Producto> resultado = new ArrayList<>();
@@ -250,10 +300,31 @@ public class MYSQL {
 
 
     public static int cookie(){
-
+        return 0;
     }
 
 
 
+    public static void deleteUserFromDatabase(String username) {
+        String sql = "DELETE FROM USUARIOS WHERE NOMBRE = ?";
 
+        try (Connection conn = MYSQL.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, username);
+            pstmt.executeUpdate();
+
+            System.out.println("Usuario eliminado exitosamente.");
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar el usuario: " + e.getMessage());
+        }
+    }
+
+    public static void setUsername(String username){
+        MYSQL.username = username;
+    }
+
+    public static String getUsername(){
+        return MYSQL.username;
+    }
 }

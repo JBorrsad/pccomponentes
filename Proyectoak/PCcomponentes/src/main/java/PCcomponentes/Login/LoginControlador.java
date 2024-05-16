@@ -29,10 +29,10 @@ public class LoginControlador {
         String username = loginNombre.getText().trim();
         String password = loginContraseña.getText().trim();
 
-        MYSQL mysql = new MYSQL();
         if (MYSQL.checkusuario(username, password)) {
-            Usuario usuario = MYSQL.getUsuariosSQL(username,password);
-            String rol = usuario.getROL();
+            MYSQL.setUsername(username);
+            Usuario usuario = MYSQL.getUsuariosSQL(username);
+            String rol = usuario.getRol();
             if (!rol.equals("CLIENTE") && !rol.equals("PROVEEDOR")) {
                 throw new PermisosInsuficientesException("El usuario no tiene permisos para acceder a la aplicación.");
             }

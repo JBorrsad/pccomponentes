@@ -12,4 +12,7 @@ module pccomp.PCcomponentes {
     opens PCcomponentes.Login to javafx.fxml;
     exports PCcomponentes.Productos;
     opens PCcomponentes.Productos to javafx.fxml;
+    opens PCcomponentes.Profile to javafx.fxml;
+    exports PCcomponentes.Profile;
+
 }

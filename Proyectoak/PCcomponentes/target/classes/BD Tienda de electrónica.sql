@@ -1,52 +1,42 @@
 CREATE DATABASE tiendaElectronica;
 USE tiendaElectronica;
-DROP DATABASE tiendaElectronica;
+-- DROP DATABASE tiendaElectronica;
 
 CREATE TABLE USUARIOS (
                           ID INT PRIMARY KEY AUTO_INCREMENT,
-                          NOMBRE varchar(30),
-                          CONTRASEÑA varchar(20),
+                          USERNAME VARCHAR(30) UNIQUE,
+                          NOMBRE VARCHAR(30),
+                          CONTRASEÑA VARCHAR(20),
                           ROL ENUM ("PROVEEDOR", "CLIENTE"),
-                          PAGONOMBRE varchar(30),
-                          PAGOAPELLIDO varchar(30),
+                          PAGONOMBRE VARCHAR(30),
+                          PAGOAPELLIDO VARCHAR(30),
                           CP NUMERIC,
-                          PROVINCIA varchar(50),
-                          LOCALIDAD varchar(50),
-                          DIRECCION varchar(100),
-                          CUENTABANCO VARCHAR(24)
-                          
-				);
-
-
-
-
+                          PROVINCIA VARCHAR(50),
+                          LOCALIDAD VARCHAR(50),
+                          DIRECCION VARCHAR(100),
+                          CUENTABANCO VARCHAR(24),
+                          FOTO VARCHAR(100)
+);
 
 CREATE TABLE PRODUCTOS (
                            ID INT PRIMARY KEY AUTO_INCREMENT,
                            NOMBRE VARCHAR(50),
                            STOCK INT,
                            PRECIO DOUBLE
-                           
 );
-
 
 CREATE TABLE PEDIDOS (
-
-		ID INT PRIMARY KEY AUTO_INCREMENT,
-		PEDIDO VARCHAR(255) NOT NULL,
-		NOMBRE varchar(30),
-		APELLIDO varchar(30),
-		DIRECCION varchar(100),
-		 CUENTABANCO VARCHAR(24)
-
+                         ID INT PRIMARY KEY AUTO_INCREMENT,
+                         PEDIDO VARCHAR(255) NOT NULL,
+                         NOMBRE VARCHAR(30),
+                         APELLIDO VARCHAR(30),
+                         DIRECCION VARCHAR(100),
+                         CUENTABANCO VARCHAR(24)
 );
 
-
-INSERT INTO USUARIOS (ID, NOMBRE, CONTRASEÑA, ROL) VALUES
-                                                       (1, '1', '1', 'PROVEEDOR'),
-                                                        (2, '2', '2', 'CLIENTE');
-                                                    
-
+INSERT INTO USUARIOS (ID, USERNAME, NOMBRE, CONTRASEÑA, ROL) VALUES
+                                                                 (1, 'user1', 'Usuario Uno', '1', 'PROVEEDOR'),
+                                                                 (2, 'user2', 'Usuario Dos', '2', 'CLIENTE');
 
 INSERT INTO PRODUCTOS (ID, NOMBRE, STOCK, PRECIO) VALUES
                                                       (1, 'Ordenador', 50, 899.99),
