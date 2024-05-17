@@ -2,6 +2,7 @@ package PCcomponentes.Profile;
 
 import PCcomponentes.Productos.MYSQL;
 import PCcomponentes.Usuario;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -54,15 +55,24 @@ public class LoginEditar {
     private Button Cancelar;
 
     private String username;
+    private int id ;
 
     public void initialize() {
         this.username = MYSQL.getUsername();
         mostrarDatosUsuario();
+
+        Cancelar.setOnAction(this::cerrarVentana);
     }
 
-
+    private void cerrarVentana(ActionEvent event) {
+        // Obtener la ventana actual
+        Stage stage = (Stage) Cancelar.getScene().getWindow();
+        // Cerrar la ventana
+        stage.close();
+    }
     public void mostrarDatosUsuario() {
         Usuario usuario = MYSQL.getUsuariosSQL(username);
+        profile.getClass().getResourceAsStream("src/main/resources/img/account.png");
         if (usuario != null) {
             nombre.setText(usuario.getUsername());
             contrasena.setText(usuario.getContrasena());
@@ -97,10 +107,11 @@ public class LoginEditar {
     @FXML
     void guardarCambios() {
         // Obtener la ruta relativa de la imagen
-        String imagePath = "src/main/resources/img/" + new File(profile.getImage().getUrl()).getName();
+        String imagePath = "src/main/resources/img" + new File(profile.getImage().getUrl()).getName();
 
         // Crear un nuevo objeto Usuario con los parámetros correctos
         Usuario usuario = new Usuario(
+                id,
                 username, // username
                 contrasena.getText(), // contrasena
                 rol.getText(), // rol

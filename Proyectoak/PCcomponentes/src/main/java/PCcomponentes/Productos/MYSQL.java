@@ -62,6 +62,7 @@ public class MYSQL {
             ResultSet resultSet = pstmt.executeQuery();
 
             if (resultSet.next()) {
+                Integer id = resultSet.getInt("ID");
                 String nombre = resultSet.getString("USERNAME");
                 String contraseña = resultSet.getString("CONTRASEÑA");
                 String rol = resultSet.getString("ROL");
@@ -73,7 +74,7 @@ public class MYSQL {
                 String direccion = resultSet.getString("DIRECCION");
                 String cuentabanco = resultSet.getString("CUENTABANCO");
                 String foto = resultSet.getString("FOTO");
-                usuario = new Usuario(username,contraseña, rol, paganombre, pagaapellido, codigopostal, provincia, localidad, direccion, cuentabanco, foto);
+                usuario = new Usuario(id,username,contraseña, rol, paganombre, pagaapellido, codigopostal, provincia, localidad, direccion, cuentabanco, foto);
             }
 
         } catch (SQLException e) {
@@ -162,7 +163,6 @@ public class MYSQL {
             pstmt.setString(1, nombre);
             pstmt.setInt(2, stock);
             pstmt.setDouble(3, precio);
-
             pstmt.executeUpdate();
 
             System.out.println("Producto añadido exitosamente a la base de datos.");

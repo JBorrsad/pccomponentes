@@ -1,6 +1,10 @@
 package PCcomponentes;
 
 public class Usuario {
+
+
+
+    private int id;
     private String username;
     private String contrasena;
     private String rol;
@@ -13,7 +17,7 @@ public class Usuario {
     private String cuentaBanco;
     private String foto;
 
-    public Usuario(String username, String contrasena, String rol, String pagoNombre, String pagoApellido, int codigoPostal, String provincia, String localidad, String direccion, String cuentaBanco, String foto) {
+    public Usuario(int id,String username, String contrasena, String rol, String pagoNombre, String pagoApellido, int codigoPostal, String provincia, String localidad, String direccion, String cuentaBanco, String foto) {
         this.username = username;
         this.contrasena = contrasena;
         this.rol = rol;
@@ -28,6 +32,15 @@ public class Usuario {
     }
 
     // Getters y Setters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return username;
     }
