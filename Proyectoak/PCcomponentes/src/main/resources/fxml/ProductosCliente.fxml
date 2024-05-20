@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="441.0" prefWidth="667.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Productos.ProductoClienteControlador">
+<AnchorPane prefHeight="441.0" prefWidth="667.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Productos.ProductoClienteControlador">
     <children>
         <TableView fx:id="tablaproductos" layoutX="23.0" layoutY="66.0" prefHeight="334.0" prefWidth="290.0">
             <columns>
-                <TableColumn fx:id="IDTABLA" prefWidth="48.0" style="-fx-background-color: lime;" text="ID" />
-                <TableColumn fx:id="NOMBRETABLA" prefWidth="98.0" style="-fx-background-color: lime;" text="Nombre" />
-                <TableColumn fx:id="STOCKTABLA" prefWidth="62.0" style="-fx-background-color: lime;" text="Stock" />
-                <TableColumn fx:id="PRECIOTABLA" prefWidth="81.0" style="-fx-background-color: lime;" text="Precio" />
+                <TableColumn fx:id="IDTABLA" prefWidth="48.0"  text="ID" />
+                <TableColumn fx:id="NOMBRETABLA" prefWidth="98.0"  text="Nombre" />
+                <TableColumn fx:id="STOCKTABLA" prefWidth="62.0"  text="Stock" />
+                <TableColumn fx:id="PRECIOTABLA" prefWidth="81.0"  text="Precio" />
             </columns>
         </TableView>
         <Button fx:id="refrescar" layoutX="39.0" layoutY="2.0" mnemonicParsing="false" onAction="#refrescar" prefHeight="25.0" prefWidth="37.0" style="-fx-background-color: silver;" text="↺">
@@ -24,13 +20,13 @@
                 <Font name="Arial Black" size="15.0" />
             </font>
         </Button>
-        <Button fx:id="añadirapedido" layoutX="352.0" layoutY="365.0" mnemonicParsing="false" onAction="#añadirAPedido" style="-fx-background-color: lightblue;" text="Añadir a Pedido" />
-        <Button fx:id="mas" layoutX="493.0" layoutY="365.0" mnemonicParsing="false" onAction="#aumentarCantidad" style="-fx-background-color: red;" text="+" />
-        <Button fx:id="menos" layoutX="558.0" layoutY="365.0" mnemonicParsing="false" onAction="#disminuirCantidad" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: yellow;" text="-" />
+        <Button fx:id="añadirapedido" layoutX="352.0" layoutY="365.0" mnemonicParsing="false" onAction="#añadirAPedido"  text="Añadir a Pedido" />
+        <Button fx:id="mas" layoutX="493.0" layoutY="365.0" mnemonicParsing="false" onAction="#aumentarCantidad"  text="+" />
+        <Button fx:id="menos" layoutX="558.0" layoutY="365.0" mnemonicParsing="false" onAction="#disminuirCantidad" prefHeight="25.0" prefWidth="25.0"  text="-" />
         <TableView fx:id="tablaPedido" layoutX="348.0" layoutY="126.0" prefHeight="226.0" prefWidth="257.0">
             <columns>
-                <TableColumn fx:id="NombreProducto" prefWidth="129.0" style="-fx-background-color: limegreen;" text="producto" />
-                <TableColumn fx:id="Cantidad" prefWidth="127.0" style="-fx-background-color: limegreen;" text="Cantidad" />
+                <TableColumn fx:id="NombreProducto" prefWidth="129.0"  text="producto" />
+                <TableColumn fx:id="Cantidad" prefWidth="127.0"  text="Cantidad" />
             </columns>
         </TableView>
         <ImageView fx:id="img_id" fitHeight="68.0" fitWidth="79.0" layoutX="611.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
@@ -39,7 +35,6 @@
             </image>
         </ImageView>
         <Label fx:id="profile" contentDisplay="CENTER" layoutX="628.0" layoutY="75.0" prefHeight="17.0" prefWidth="54.0" text="Profile" textAlignment="CENTER" />
-        <Label fx:id="idusuario" layoutX="10.0" layoutY="10.0" text="ID Usuario" />
-        <Label fx:id="welcome" layoutX="10.0" layoutY="30.0" text="Bienvenido, Usuario" />
+        <Label fx:id="idusuario" layoutX="449.0" layoutY="75.0" text="ID Usuario" />
     </children>
 </AnchorPane>
