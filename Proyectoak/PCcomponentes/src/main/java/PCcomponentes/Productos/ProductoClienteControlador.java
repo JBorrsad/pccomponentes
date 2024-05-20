@@ -7,8 +7,15 @@ import PCcomponentes.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductoClienteControlador {
@@ -56,6 +63,9 @@ public class ProductoClienteControlador {
     private Label idusuario;
 
     @FXML
+    private Label profile;
+
+    @FXML
     public void initialize() {
         System.out.println("Inicializando ProductoClienteControlador");
 
@@ -67,7 +77,25 @@ public class ProductoClienteControlador {
             System.out.println("No se encontró ningún usuario en la sesión.");
         }
         refrescar();
+
+        profile.setOnMouseEntered(this::azul);
+        profile.setOnMouseExited(this::normal);
+        profile.setOnMouseClicked(event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/fxml/LoginEditarOCerrar.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
+
+
 
     @FXML
     void refrescar() {
@@ -178,5 +206,13 @@ public class ProductoClienteControlador {
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    private void normal(MouseEvent mouseEvent) {
+        profile.setStyle("-fx-background-color: transparent;");
+    }
+
+    private void azul(MouseEvent mouseEvent) {
+        profile.setStyle("-fx-text-fill: blue; -fx-underline: true;");
     }
 }

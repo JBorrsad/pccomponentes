@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -68,7 +69,8 @@ public class ProductoControlador {
             System.out.println("No se encontró ningún usuario en la sesión.");
         }
         refrescar();
-
+        profile.setOnMouseEntered(this::azul);
+        profile.setOnMouseExited(this::normal);
         profile.setOnMouseClicked(event -> {
             try {
                 FXMLLoader loader = new FXMLLoader();
@@ -83,6 +85,8 @@ public class ProductoControlador {
             }
         });
     }
+
+
 
     @FXML
     void refrescar() {
@@ -217,4 +221,13 @@ public class ProductoControlador {
             e.printStackTrace();
         }
     }
+
+    private void normal(MouseEvent mouseEvent) {
+        profile.setStyle("-fx-background-color: transparent;");
+    }
+
+    private void azul(MouseEvent mouseEvent) {
+        profile.setStyle("-fx-text-fill: blue; -fx-underline: true;");
+    }
+
 }

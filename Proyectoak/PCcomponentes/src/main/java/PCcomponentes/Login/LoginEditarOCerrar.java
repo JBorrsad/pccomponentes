@@ -11,11 +11,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static PCcomponentes.Login.LoginControlador.closeAllStagesExcept;
+
 
 public class LoginEditarOCerrar {
 
+    private Stage productosStage;
+
     @FXML
     private void handleEditar(ActionEvent event) {
+
         try {
             // Load the new FXML for the editing scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginEditar.fxml"));
@@ -29,22 +34,37 @@ public class LoginEditarOCerrar {
             e.printStackTrace();
         }
     }
+    @FXML// En LoginEditarOCerrar.java
 
-    @FXML
     private void handleCerrar(ActionEvent event) {
+        // Eliminar cualquier información de usuario almacenada
+        // En este caso, suponemos que tienes una clase Cookie para almacenar la sesión del usuario
+
+
+        // Verificar si la instancia productosStage está abierta y cerrarla si es necesario
+        if (productosStage != null && productosStage.isShowing()) {
+            productosStage.close();
+        }
+
         try {
-            // Load the login FXML
+            // Obtener el escenario actual y cerrarlo
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+
+            // Cargar la ventana de inicio de sesión
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
             Parent root = loader.load();
 
-            // Get the current stage
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            // Crear un nuevo escenario para la ventana de inicio de sesión
+            Stage loginStage = new Stage();
+            loginStage.setScene(new Scene(root));
+            loginStage.show();
+            closeAllStagesExcept(loginStage);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     private void handleEliminar(ActionEvent event) {
@@ -64,5 +84,9 @@ public class LoginEditarOCerrar {
         }
     }
 
+
+    public void setProductosStage(Stage productosStage) {
+        this.productosStage = productosStage;
+    }
 
 }

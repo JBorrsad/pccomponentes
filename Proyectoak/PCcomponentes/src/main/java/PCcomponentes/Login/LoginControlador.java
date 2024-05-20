@@ -1,6 +1,7 @@
 package PCcomponentes.Login;
 
 import PCcomponentes.Productos.MYSQL;
+import PCcomponentes.Productos.ProductoClienteControlador;
 import PCcomponentes.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,9 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class LoginControlador {
     @FXML
@@ -23,7 +24,6 @@ public class LoginControlador {
     TextField loginNombre;
     @FXML
     Button botonLogin;
-    ArrayList<Usuario> usuarios= new ArrayList<>();
 
     public void login(ActionEvent event) throws PermisosInsuficientesException {
         String username = loginNombre.getText().trim();
@@ -33,7 +33,7 @@ public class LoginControlador {
             MYSQL.setUsername(username);
             Usuario usuario = MYSQL.getUsuariosSQL(username);
             String rol = usuario.getRol();
-
+            Cookie.getInstance().setUsuario(usuario);
             if (!rol.equals("CLIENTE") && !rol.equals("PROVEEDOR")) {
                 throw new PermisosInsuficientesException("El usuario no tiene permisos para acceder a la aplicación.");
             }
@@ -51,7 +51,6 @@ public class LoginControlador {
         alert.showAndWait();
     }
 
-
     public void initialize() {
         botonLogin.setOnAction(event -> {
             try {
@@ -61,23 +60,14 @@ public class LoginControlador {
             }
         });
     }
+
+    @FXML
     private void changeScene(String rol) {
-        // Obtener el escenario actual
-        Stage stage = (Stage) botonLogin.getScene().getWindow();
-
-        // Cerrar la pantalla de inicio de sesión
-        stage.close();
-
-        // Obtener el usuario actual
-        String username = loginNombre.getText().trim();
-        Usuario usuario = MYSQL.getUsuariosSQL(username);
-
-        // Establecer el usuario en la instancia de Cookie
-        Cookie.getInstance().setUsuario(usuario);
-        System.out.println("Usuario almacenado en Cookie: " + usuario.getUsername());
-
-        // Abrir la pantalla correspondiente según el rol del usuario
         try {
+            // Obtener el escenario actual
+            Stage stage = (Stage) botonLogin.getScene().getWindow();
+
+            // Cargar la ventana correspondiente según el rol del usuario
             FXMLLoader loader = new FXMLLoader();
             if (rol.equals("CLIENTE")) {
                 loader.setLocation(getClass().getResource("/fxml/ProductosCliente.fxml"));
@@ -87,17 +77,37 @@ public class LoginControlador {
                 showAlert("Error", "Rol de usuario no válido.");
                 return;
             }
-            System.out.println("Rol del usuario: " + rol);
 
+            // Cargar el archivo FXML y obtener su controlador
             Parent root = loader.load();
+            if (rol.equals("CLIENTE")) {
+                ProductoClienteControlador controller = loader.getController();
+                // Establecer el usuario en el controlador de ProductosCliente.fxml
+                String username = loginNombre.getText().trim();
+                Usuario usuario = MYSQL.getUsuariosSQL(username);
+
+            }
+
+            // Configurar la nueva escena
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public static void closeAllStagesExcept(Stage stageToKeep) {
+        for (Window window : Window.getWindows()) {
+            if (window instanceof Stage) {
+                Stage stage = (Stage) window;
+                if (stage != stageToKeep) {
+                    stage.close();
+                    Cookie.getInstance().setUsuario(null);
 
-
+                }
+            }
+        }
+    }
 
 }

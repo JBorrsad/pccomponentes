@@ -22,5 +22,7 @@ public class Cookie {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+
 }
 

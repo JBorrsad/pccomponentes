@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -22,12 +21,7 @@
        <Button fx:id="nuevoproducto" layoutX="75.0" layoutY="151.0" mnemonicParsing="false" onAction="#anadirNuevoProducto" text="Nuevo Producto" />
        <Button fx:id="eliminar" layoutX="84.0" layoutY="317.0" mnemonicParsing="false" onAction="#eliminar" prefHeight="25.0" prefWidth="103.0" text="eliminar" />
       <Button fx:id="modificar" layoutX="84.0" layoutY="240.0" mnemonicParsing="false" onAction="#Modificar" prefHeight="25.0" prefWidth="103.0" text="modificar" />
-      <ImageView fx:id="img_id" fitHeight="66.0" fitWidth="66.0" layoutX="601.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/account.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="profile" layoutX="613.0" layoutY="74.0" prefHeight="17.0" prefWidth="49.0" text="Profile" />
-      <Label fx:id="idusuario" layoutX="439.0" layoutY="25.0" text="Label" />
+      <Label fx:id="profile" layoutX="550.0" layoutY="30.0" prefHeight="17.0" prefWidth="95.0" text="Editar Perfil" />
+      <Label fx:id="idusuario" layoutX="334.0" layoutY="21.0" text="Label" />
    </children>
 </AnchorPane>
