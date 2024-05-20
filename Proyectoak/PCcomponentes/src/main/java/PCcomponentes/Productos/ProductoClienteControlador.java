@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.util.ArrayList;
 
 public class ProductoClienteControlador {
@@ -59,10 +60,12 @@ public class ProductoClienteControlador {
     public void initialize() {
         System.out.println("Inicializando ProductoClienteControlador");
 
+        // Verificar el usuario de la cookie
         Usuario usuario = Cookie.getInstance().getUsuario();
         if (usuario != null) {
-            System.out.println("Bienvenido, " + usuario.getUsername());
+            System.out.println("Usuario encontrado en Cookie: " + usuario.getUsername());
             idusuario.setText(String.valueOf(usuario.getId()));
+            welcome.setText("Bienvenido, " + usuario.getUsername());
         } else {
             System.out.println("No se encontró ningún usuario en la sesión.");
         }

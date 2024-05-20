@@ -33,6 +33,7 @@ public class LoginControlador {
             MYSQL.setUsername(username);
             Usuario usuario = MYSQL.getUsuariosSQL(username);
             String rol = usuario.getRol();
+
             if (!rol.equals("CLIENTE") && !rol.equals("PROVEEDOR")) {
                 throw new PermisosInsuficientesException("El usuario no tiene permisos para acceder a la aplicación.");
             }
@@ -60,13 +61,20 @@ public class LoginControlador {
             }
         });
     }
-
     private void changeScene(String rol) {
         // Obtener el escenario actual
         Stage stage = (Stage) botonLogin.getScene().getWindow();
 
         // Cerrar la pantalla de inicio de sesión
         stage.close();
+
+        // Obtener el usuario actual
+        String username = loginNombre.getText().trim();
+        Usuario usuario = MYSQL.getUsuariosSQL(username);
+
+        // Establecer el usuario en la instancia de Cookie
+        Cookie.getInstance().setUsuario(usuario);
+        System.out.println("Usuario almacenado en Cookie: " + usuario.getUsername());
 
         // Abrir la pantalla correspondiente según el rol del usuario
         try {
@@ -81,7 +89,6 @@ public class LoginControlador {
             }
             System.out.println("Rol del usuario: " + rol);
 
-
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -90,5 +97,7 @@ public class LoginControlador {
             e.printStackTrace();
         }
     }
+
+
 
 }
