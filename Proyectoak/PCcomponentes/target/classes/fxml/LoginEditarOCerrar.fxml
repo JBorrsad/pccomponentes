@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="272.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Login.LoginEditarOCerrar">
+   <children>
+      <Button fx:id="editar" layoutX="78.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleEditar" prefHeight="25.0" prefWidth="116.0" text="Editar Perfil" />
+      <Button fx:id="cerrar" layoutX="78.0" layoutY="228.0" mnemonicParsing="false" onAction="#handleCerrar" prefHeight="25.0" prefWidth="116.0" text="Cerrar sesión" />
+   </children>
+</Pane>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Productos.ModificarControlador">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="precioField" layoutX="51.0" layoutY="125.0" />
+      <TextField fx:id="stockField" layoutX="51.0" layoutY="188.0" />
+      <TextField fx:id="nombreField" layoutX="51.0" layoutY="63.0" />
+      <Label layoutX="28.0" layoutY="31.0" prefHeight="25.0" prefWidth="127.0" text="Nombre :" />
+      <Label layoutX="28.0" layoutY="94.0" prefHeight="25.0" prefWidth="127.0" text="Precio :" />
+      <Label layoutX="28.0" layoutY="158.0" prefHeight="25.0" prefWidth="127.0" text="Stock :" />
+      <Button fx:id="guardarButton" layoutX="67.0" layoutY="276.0" mnemonicParsing="false" onAction="#guardarCambios" prefHeight="25.0" prefWidth="88.0" text="Guardar" />
+      <Button fx:id="cancelarButton" layoutX="289.0" layoutY="276.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="79.0" text="Cancelar" />
+   </children>
+</Pane>

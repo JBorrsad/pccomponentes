@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.ResumenPagoControlador">
+
+    <children>
+        <TableView fx:id="tablaPedido" layoutX="33.0" layoutY="66.0" prefHeight="139.0" prefWidth="399.0">
+            <columns>
+                <TableColumn fx:id="NombreProducto" prefWidth="295.0" text="producto" />
+                <TableColumn fx:id="Cantidad" prefWidth="105.0" text="Cantidad" />
+            </columns>
+        </TableView>
+        <TextField fx:id="paganombre" layoutX="26.0" layoutY="288.0" />
+        <TextField fx:id="pagaapellido" layoutX="184.0" layoutY="288.0" />
+        <TextField fx:id="provincia" layoutX="26.0" layoutY="392.0" />
+        <TextField fx:id="localidad" layoutX="26.0" layoutY="338.0" />
+        <TextField fx:id="direccion" layoutX="184.0" layoutY="338.0" />
+        <TextField fx:id="codigopostal" layoutX="184.0" layoutY="392.0" />
+        <TextField fx:id="cuentabancaria" layoutX="110.0" layoutY="450.0" text="ES" />
+        <Label layoutX="26.0" layoutY="266.0" prefHeight="17.0" prefWidth="75.0" text="Nombre" />
+        <Label layoutX="184.0" layoutY="266.0" prefHeight="17.0" prefWidth="75.0" text="Apellido" />
+        <Label layoutX="26.0" layoutY="375.0" prefHeight="17.0" prefWidth="75.0" text="Provincia" />
+        <Label layoutX="26.0" layoutY="317.0" prefHeight="17.0" prefWidth="75.0" text="Localidad" />
+        <Label layoutX="184.0" layoutY="317.0" prefHeight="17.0" prefWidth="75.0" text="Direccion" />
+        <Label layoutX="184.0" layoutY="375.0" prefHeight="17.0" prefWidth="75.0" text="Codigopostal" />
+        <Label layoutX="123.0" layoutY="425.0" prefHeight="17.0" prefWidth="122.0" text="Cuentabancaria" />
+        <Button fx:id="comprar" layoutX="378.0" layoutY="338.0" mnemonicParsing="false" text="Pagar con Tarjeta" />
+      <Label layoutX="34.0" layoutY="227.0" text="Tus datos de Facturación">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="52.0" layoutY="27.0" text="Resumen del Pedido">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="Paypal" fitHeight="27.0" fitWidth="81.0" layoutX="387.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true" />
+    </children>
+</Pane>

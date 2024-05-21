@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="441.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Productos.ProductoControlador">
+   <children>
+      <TableView fx:id="tablaproductos" layoutX="235.0" layoutY="54.0" prefHeight="334.0" prefWidth="339.0">
+        <columns>
+          <TableColumn fx:id="IDTABLA" prefWidth="39.0" text="ID" />
+            <TableColumn fx:id="NOMBRETABLA" prefWidth="125.0" text="Nombre" />
+            <TableColumn fx:id="STOCKTABLA" minWidth="0.0" prefWidth="72.0" text="Stock" />
+            <TableColumn fx:id="PRECIOTABLA" prefWidth="53.0" text="Precio" />
+        </columns>
+      </TableView>
+      <Button fx:id="refrescar" layoutX="119.0" layoutY="58.0" mnemonicParsing="false" onAction="#refrescar" prefHeight="31.0" prefWidth="21.0" text="↺">
+         <font>
+            <Font name="Inter Regular" size="15.0" />
+         </font></Button>
+       <Button fx:id="nuevoproducto" layoutX="75.0" layoutY="151.0" mnemonicParsing="false" onAction="#anadirNuevoProducto" text="Nuevo Producto" />
+       <Button fx:id="eliminar" layoutX="84.0" layoutY="317.0" mnemonicParsing="false" onAction="#eliminar" prefHeight="25.0" prefWidth="103.0" text="eliminar" />
+      <Button fx:id="modificar" layoutX="84.0" layoutY="240.0" mnemonicParsing="false" onAction="#Modificar" prefHeight="25.0" prefWidth="103.0" text="modificar" />
+      <Label fx:id="profile" layoutX="550.0" layoutY="30.0" prefHeight="17.0" prefWidth="95.0" text="Editar Perfil" />
+      <Label fx:id="idusuario" layoutX="334.0" layoutY="21.0" text="Label" />
+   </children>
+</AnchorPane>

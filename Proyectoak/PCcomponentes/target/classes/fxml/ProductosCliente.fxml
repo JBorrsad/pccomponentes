@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="441.0" prefWidth="793.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Productos.ProductoClienteControlador">
+    <children>
+        <TableView fx:id="tablaproductos" layoutX="23.0" layoutY="23.0" prefHeight="334.0" prefWidth="290.0">
+            <columns>
+                <TableColumn fx:id="IDTABLA" prefWidth="48.0" text="ID" />
+                <TableColumn fx:id="NOMBRETABLA" prefWidth="98.0" text="Nombre" />
+                <TableColumn fx:id="STOCKTABLA" prefWidth="62.0" text="Stock" />
+                <TableColumn fx:id="PRECIOTABLA" prefWidth="81.0" text="Precio" />
+            </columns>
+        </TableView>
+        <Button fx:id="añadirapedido" layoutX="41.0" layoutY="378.0" mnemonicParsing="false" onAction="#añadirAPedido" text="Añadir a la Cesta" />
+        <Label fx:id="profile" contentDisplay="CENTER" layoutX="653.0" layoutY="27.0" prefHeight="17.0" prefWidth="92.0" text="Editar Perfil" textAlignment="CENTER" visible="false" />
+        <Label fx:id="idusuario" layoutX="431.0" layoutY="35.0" text="ID Usuario" />
+        <TableView fx:id="tablaPedido" layoutX="345.0" layoutY="151.0" prefHeight="106.0" prefWidth="416.0">
+            <columns>
+                <TableColumn fx:id="NombreProducto" prefWidth="163.0" text="producto" />
+                <TableColumn fx:id="Cantidad" prefWidth="70.0" text="Cantidad" />
+                <TableColumn fx:id="Precio" prefWidth="100.0" text="Precio/unidad" />
+                <TableColumn fx:id="Acciones" prefWidth="100.0" />
+            </columns>
+        </TableView>
+        <Label layoutX="353.0" layoutY="115.0" text="Tus productos">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Pane layoutX="564.0" layoutY="283.0" prefHeight="121.0" prefWidth="178.0" style="-fx-background-color: white;">
+            <children>
+                <Button fx:id="tramitarpedido" layoutX="39.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleTramitarPedido" text="Tramitar pedido" />
+                <Label fx:id="totalpedido" layoutX="28.0" layoutY="20.0" prefHeight="33.0" prefWidth="150.0" text="Total del pedido: " />
+            </children>
+        </Pane>
+        <Button fx:id="miPerfil" layoutX="693.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleProfileButton" text="Mi Perfil" />
+    </children>
+</AnchorPane>
