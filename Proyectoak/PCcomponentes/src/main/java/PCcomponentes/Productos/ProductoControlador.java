@@ -154,16 +154,15 @@ public class ProductoControlador {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
-                    setStyle(null);
-                    getTableRow().setStyle(null); // Eliminar cualquier estilo de fila previamente aplicado
+                    setStyle(""); // Reset cell style
                 } else {
                     setText(item.toString());
-                    if (item==0) {
-                        getTableRow().setStyle("-fx-background-color: #F1948A;");
-                    } else if (item<5) {
-                        getTableRow().setStyle("-fx-background-color: #F7DC6F;");
+                    if (item == 0) {
+                        setStyle("-fx-background-color: #F1948A;"); // Red background
+                    } else if (item < 5) {
+                        setStyle("-fx-background-color: #F7DC6F;"); // Yellow background
                     } else {
-                        getTableRow().setStyle(null);
+                        setStyle(""); // Default background
                     }
                 }
             }

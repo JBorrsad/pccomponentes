@@ -6,27 +6,27 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Login.LoginEditar">
 
     <children>
-        <TableView fx:id="tablaPedido" layoutX="26.0" layoutY="24.0" prefHeight="351.0" prefWidth="685.0">
+        <TableView fx:id="tablaPedido" layoutX="26.0" layoutY="24.0" prefHeight="205.0" prefWidth="399.0">
             <columns>
-                <TableColumn fx:id="NombreProducto" prefWidth="519.0" style="-fx-background-color: limegreen;" text="producto" />
-                <TableColumn fx:id="Cantidad" prefWidth="165.0" style="-fx-background-color: limegreen;" text="Cantidad" />
+                <TableColumn fx:id="NombreProducto" prefWidth="300.0" text="producto" />
+                <TableColumn fx:id="Cantidad" prefWidth="100.0" text="Cantidad" />
             </columns>
         </TableView>
-        <TextField fx:id="paganombre" layoutX="43.0" layoutY="408.0" />
-        <TextField fx:id="pagaapellido" layoutX="43.0" layoutY="459.0" />
-        <TextField fx:id="provincia" layoutX="220.0" layoutY="406.0" />
-        <TextField fx:id="localidad" layoutX="220.0" layoutY="463.0" />
-        <TextField fx:id="direccion" layoutX="391.0" layoutY="404.0" />
-        <TextField fx:id="codigopostal" layoutX="391.0" layoutY="462.0" />
-        <TextField fx:id="cuentabancaria" layoutX="554.0" layoutY="405.0" text="ES" />
-        <Label layoutX="43.0" layoutY="384.0" prefHeight="17.0" prefWidth="75.0" text="Nombre" />
-        <Label layoutX="43.0" layoutY="439.0" prefHeight="17.0" prefWidth="75.0" text="Apellido" />
-        <Label layoutX="218.0" layoutY="382.0" prefHeight="17.0" prefWidth="75.0" text="Provincia" />
-        <Label layoutX="218.0" layoutY="437.0" prefHeight="17.0" prefWidth="75.0" text="Localidad" />
-        <Label layoutX="389.0" layoutY="381.0" prefHeight="17.0" prefWidth="75.0" text="Direccion" />
-        <Label layoutX="389.0" layoutY="438.0" prefHeight="17.0" prefWidth="75.0" text="Codigopostal" />
-        <Label layoutX="554.0" layoutY="386.0" prefHeight="17.0" prefWidth="122.0" text="Cuentabancaria" />
-        <Button fx:id="Paypal" layoutX="554.0" layoutY="459.0" mnemonicParsing="false" text="Paypal" />
-        <Button fx:id="comprar" layoutX="628.0" layoutY="462.0" mnemonicParsing="false" text="Comprar" />
+        <TextField fx:id="paganombre" layoutX="26.0" layoutY="299.0" />
+        <TextField fx:id="pagaapellido" layoutX="206.0" layoutY="299.0" />
+        <TextField fx:id="provincia" layoutX="57.0" layoutY="459.0" />
+        <TextField fx:id="localidad" layoutX="38.0" layoutY="387.0" />
+        <TextField fx:id="direccion" layoutX="219.0" layoutY="382.0" />
+        <TextField fx:id="codigopostal" layoutX="219.0" layoutY="462.0" />
+        <TextField fx:id="cuentabancaria" layoutX="411.0" layoutY="299.0" text="ES" />
+        <Label layoutX="56.0" layoutY="274.0" prefHeight="17.0" prefWidth="75.0" text="Nombre" />
+        <Label layoutX="218.0" layoutY="274.0" prefHeight="17.0" prefWidth="75.0" text="Apellido" />
+        <Label layoutX="63.0" layoutY="430.0" prefHeight="17.0" prefWidth="75.0" text="Provincia" />
+        <Label layoutX="37.0" layoutY="354.0" prefHeight="17.0" prefWidth="75.0" text="Localidad" />
+        <Label layoutX="218.0" layoutY="354.0" prefHeight="17.0" prefWidth="75.0" text="Direccion" />
+        <Label layoutX="226.0" layoutY="430.0" prefHeight="17.0" prefWidth="75.0" text="Codigopostal" />
+        <Label layoutX="411.0" layoutY="274.0" prefHeight="17.0" prefWidth="122.0" text="Cuentabancaria" />
+        <Button fx:id="Paypal" layoutX="625.0" layoutY="400.0" mnemonicParsing="false" text="Paypal" />
+        <Button fx:id="comprar" layoutX="502.0" layoutY="395.0" mnemonicParsing="false" text="Comprar" />
     </children>
 </Pane>

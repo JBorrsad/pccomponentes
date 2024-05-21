@@ -13,7 +13,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,6 +56,12 @@ public class ProductoClienteControlador {
     private TableColumn<Pedido, Integer> Cantidad;
 
     @FXML
+    private TableColumn<Pedido, Double> Precio;  // Agregando la columna de precio aquí
+
+    @FXML
+    private TableColumn<Pedido, Void> Acciones;
+
+    @FXML
     private Label welcome;
 
     @FXML
@@ -64,6 +72,9 @@ public class ProductoClienteControlador {
 
     @FXML
     private Label profile;
+
+    @FXML
+    private Label totalpedido;
 
     @FXML
     public void initialize() {
@@ -93,9 +104,65 @@ public class ProductoClienteControlador {
                 e.printStackTrace();
             }
         });
+
+        initializeAccionesColumn();
+        actualizarTotalPedido();
     }
 
+    private void initializeAccionesColumn() {
+        Acciones.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<Pedido, Void> call(final TableColumn<Pedido, Void> param) {
+                return new TableCell<>() {
 
+                    private final Label iconAumentar = new Label("+");
+                    private final Label iconDisminuir = new Label("-");
+                    private final Label iconEliminar = new Label("X");
+                    private final HBox pane = new HBox(iconAumentar, iconDisminuir, iconEliminar);
+
+                    {
+                        iconAumentar.setOnMouseClicked(event -> {
+                            Pedido pedido = getTableView().getItems().get(getIndex());
+                            if (pedido != null) {
+                                aumentarCantidad();
+                            }
+                        });
+
+                        iconDisminuir.setOnMouseClicked(event -> {
+                            Pedido pedido = getTableView().getItems().get(getIndex());
+                            if (pedido != null) {
+                                disminuirCantidad();
+                            }
+                        });
+
+                        iconEliminar.setOnMouseClicked(event -> {
+                            Pedido pedido = getTableView().getItems().get(getIndex());
+                            if (pedido != null) {
+                                int cantidad = pedido.getCantidad();
+                                tablaPedido.getItems().remove(pedido);
+                                actualizarStock(pedido.getNombre(), cantidad);
+                                refrescar();
+                                refrescarTablaPedido();
+                                actualizarTotalPedido();
+                            }
+                        });
+
+                        pane.setSpacing(15);
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(pane);
+                        }
+                    }
+                };
+            }
+        });
+    }
 
     @FXML
     void refrescar() {
@@ -116,9 +183,36 @@ public class ProductoClienteControlador {
 
         TableColumn<Producto, Double> precioColumna = new TableColumn<>("Precio");
         precioColumna.setCellValueFactory(new PropertyValueFactory<>("PRECIO"));
+        precioColumna.setCellFactory(column -> new TableCell<Producto, Double>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("%.2f €", item));
+                }
+            }
+        });
 
         NombreProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         Cantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+
+        // Configurando la columna de precio para tablaPedido
+        Precio.setCellFactory(column -> new TableCell<Pedido, Double>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    Producto producto = MYSQL.obtenerProductoPorNombre(getTableView().getItems().get(getIndex()).getNombre());
+                    if (producto != null) {
+                        setText(String.format("%.2f €", producto.getPRECIO()));
+                    }
+                }
+            }
+        });
 
         tablaproductos.getColumns().addAll(idColumna, nombreColumna, stockColumnaC, precioColumna);
         tablaproductos.setItems(listaObservable);
@@ -132,6 +226,7 @@ public class ProductoClienteControlador {
                 Pedido nuevoPedido = new Pedido(selectedProduct.getNOMBRE(), 1);
                 tablaPedido.getItems().add(nuevoPedido);
                 actualizarStock(selectedProduct.getNOMBRE(), -1);
+                actualizarTotalPedido();
             } else {
                 mostrarAlerta("Error", "Producto agotado", "No quedan productos en stock de este producto.");
             }
@@ -150,6 +245,7 @@ public class ProductoClienteControlador {
                 actualizarStock(selectedPedido.getNombre(), -1);
                 refrescarTablaPedido();
                 refrescar();
+                actualizarTotalPedido();
             } else {
                 mostrarAlerta("Error", "Stock insuficiente", "No hay suficientes productos en stock.");
             }
@@ -167,10 +263,12 @@ public class ProductoClienteControlador {
                 actualizarStock(selectedPedido.getNombre(), 1);
                 refrescarTablaPedido();
                 refrescar();
+                actualizarTotalPedido();
             }
 
             if (selectedPedido.getCantidad() == 0) {
                 tablaPedido.getItems().remove(selectedPedido);
+                actualizarTotalPedido();
             }
         } else {
             mostrarAlerta("Error", "Ningún pedido seleccionado", "Seleccione un pedido para disminuir la cantidad.");
@@ -214,5 +312,16 @@ public class ProductoClienteControlador {
 
     private void azul(MouseEvent mouseEvent) {
         profile.setStyle("-fx-text-fill: blue; -fx-underline: true;");
+    }
+
+    private void actualizarTotalPedido() {
+        double total = 0;
+        for (Pedido pedido : tablaPedido.getItems()) {
+            Producto producto = MYSQL.obtenerProductoPorNombre(pedido.getNombre());
+            if (producto != null) {
+                total += pedido.getCantidad() * producto.getPRECIO();
+            }
+        }
+        totalpedido.setText("Total del pedido: €" + String.format("%.2f", total));
     }
 }
