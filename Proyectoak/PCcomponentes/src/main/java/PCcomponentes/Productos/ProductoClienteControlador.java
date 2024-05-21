@@ -6,17 +6,18 @@ import PCcomponentes.Producto;
 import PCcomponentes.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -77,36 +78,38 @@ public class ProductoClienteControlador {
     private Label totalpedido;
 
     @FXML
+    private Button miPerfil;
+
+    @FXML
     public void initialize() {
         System.out.println("Inicializando ProductoClienteControlador");
 
         Usuario usuario = Cookie.getInstance().getUsuario();
         if (usuario != null) {
             System.out.println("Bienvenido, " + usuario.getUsername());
-            idusuario.setText("Logueado como:" + usuario.getUsername());
+            idusuario.setText("Hola " + usuario.getUsername());
         } else {
             System.out.println("No se encontró ningún usuario en la sesión.");
         }
         refrescar();
 
-        profile.setOnMouseEntered(this::azul);
-        profile.setOnMouseExited(this::normal);
-        profile.setOnMouseClicked(event -> {
-            try {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/fxml/LoginEditarOCerrar.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
         initializeAccionesColumn();
         actualizarTotalPedido();
+    }
+
+    @FXML
+    private void handleProfileButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/LoginEditarOCerrar.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initializeAccionesColumn() {

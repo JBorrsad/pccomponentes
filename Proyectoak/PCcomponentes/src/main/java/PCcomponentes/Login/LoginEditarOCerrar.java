@@ -66,23 +66,7 @@ public class LoginEditarOCerrar {
     }
 
 
-    @FXML
-    private void handleEliminar(ActionEvent event) {
-        String username = MYSQL.getUsername();
-        MYSQL.deleteUserFromDatabase(username);
-        try {
-            // Load the login FXML after deletion
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
-            Parent root = loader.load();
 
-            // Get the current stage
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 
     public void setProductosStage(Stage productosStage) {
