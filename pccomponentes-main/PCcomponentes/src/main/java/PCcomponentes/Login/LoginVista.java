@@ -19,7 +19,7 @@ public class LoginVista extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-
+//
      try {
             // Loading the FXML file and displaying the JavaFX scene
             FXMLLoader fxmlLoader = new FXMLLoader(LoginVista.class.getResource("/fxml/login.fxml"));
