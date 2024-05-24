@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="406.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Login.LoginControlador">
+   <children>
+      <ImageView fitHeight="238.0" fitWidth="295.0" layoutX="55.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Nuevo-Logo-PcComponentes.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="139.0" layoutY="241.0" prefHeight="17.0" prefWidth="60.0" text="Usuario">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font></Label>
+      <PasswordField fx:id="loginContraseña" layoutX="128.0" layoutY="348.0" />
+      <Label layoutX="139.0" layoutY="317.0" text="Contraseña">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font></Label>
+      <TextField fx:id="loginNombre" layoutX="129.0" layoutY="270.0" />
+      <Button fx:id="botonLogin" layoutX="148.0" layoutY="418.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: FF6000;" text="Login" textFill="WHITE" />
+   </children>
+</Pane>

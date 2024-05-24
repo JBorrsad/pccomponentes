@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="441.0" prefWidth="793.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Productos.ProductoClienteControlador">
+    <children>
+        <TableView fx:id="tablaproductos" layoutX="14.0" layoutY="23.0" prefHeight="334.0" prefWidth="326.0" style="-fx-background-color: white; -fx-border-color: grey;">
+            <columns>
+                <TableColumn fx:id="IDTABLA" prefWidth="48.0" text="ID" />
+                <TableColumn fx:id="NOMBRETABLA" prefWidth="98.0" text="Nombre" />
+                <TableColumn fx:id="STOCKTABLA" prefWidth="72.0" text="Stock" />
+                <TableColumn fx:id="PRECIOTABLA" prefWidth="86.0" text="Precio" />
+            </columns>
+        </TableView>
+        <Button fx:id="añadirapedido" layoutX="41.0" layoutY="378.0" mnemonicParsing="false" onAction="#añadirAPedido" style="-fx-background-color: #FF6000;" text="Añadir a la Cesta" textFill="WHITE" />
+        <Label fx:id="profile" contentDisplay="CENTER" layoutX="667.0" layoutY="28.0" prefHeight="17.0" prefWidth="92.0" text="Editar Perfil" textAlignment="CENTER" visible="false" />
+        <Label fx:id="idusuario" layoutX="690.0" layoutY="100.0" prefHeight="27.0" prefWidth="92.0" text="ID Usuario">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+        <TableView fx:id="tablaPedido" layoutX="360.0" layoutY="167.0" prefHeight="106.0" prefWidth="406.0" style="-fx-background-color: white; -fx-border-color: grey;">
+            <columns>
+                <TableColumn fx:id="NombreProducto" prefWidth="163.0" text="Producto" />
+                <TableColumn fx:id="Cantidad" prefWidth="70.0" text="Cantidad" />
+                <TableColumn fx:id="Precio" prefWidth="100.0" text="Precio/Unidad" />
+                <TableColumn fx:id="Acciones" prefWidth="69.0" />
+            </columns>
+        </TableView>
+        <Label layoutX="368.0" layoutY="131.0" text="Tus productos">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Pane layoutX="598.0" layoutY="294.0" prefHeight="121.0" prefWidth="178.0" style="-fx-background-color: LightGray; -fx-border-color: grey;">
+            <children>
+                <Button fx:id="tramitarpedido" layoutX="39.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleTramitarPedido" style="-fx-background-color: #FF6000;" text="Tramitar pedido" textFill="WHITE" />
+                <Label fx:id="totalpedido" layoutX="28.0" layoutY="20.0" prefHeight="33.0" prefWidth="150.0" text="Total del pedido: " />
+            </children>
+        </Pane>
+      <ImageView fx:id="img_id" fitHeight="72.0" fitWidth="81.0" layoutX="695.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-radius: 20;">
+         <image>
+            <Image url="@../img/account.png" />
+         </image></ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="347.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Nuevo-Logo-PcComponentes.jpg" />
+         </image>
+
+      </ImageView>
+      <Button fx:id="MiPerfil" layoutX="701.0" layoutY="132.0" mnemonicParsing="false" text="Mi Perfil" />
+    </children>
+</AnchorPane>
