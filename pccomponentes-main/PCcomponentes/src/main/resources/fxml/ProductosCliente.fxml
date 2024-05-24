@@ -48,6 +48,8 @@
          <image>
             <Image url="@../img/Nuevo-Logo-PcComponentes.jpg" />
          </image>
+
       </ImageView>
+      <Button fx:id="MiPerfil" layoutX="701.0" layoutY="132.0" mnemonicParsing="false" text="Mi Perfil" />
     </children>
 </AnchorPane>

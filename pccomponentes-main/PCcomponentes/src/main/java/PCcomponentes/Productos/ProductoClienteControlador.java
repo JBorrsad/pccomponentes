@@ -28,7 +28,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductoClienteControlador {
-
+    @FXML
+    private Button MiPerfil;
     @FXML
     private TableView<Producto> tablaproductos;
     @FXML
@@ -63,7 +64,7 @@ public class ProductoClienteControlador {
     public void initialize() {
         this.username = MYSQL.getUsername();
         cargarFotoPerfil();
-        img_id.setOnMouseClicked(event -> abrirVentanaEditarPerfil());
+        MiPerfil.setOnMouseClicked(event -> abrirVentanaEditarPerfil());
 
         Usuario usuario = Cookie.getInstance().getUsuario();
         if (usuario != null) {
