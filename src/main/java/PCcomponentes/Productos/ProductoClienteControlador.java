@@ -121,19 +121,30 @@ public class ProductoClienteControlador {
                 Pedido pedido = getTableView().getItems().get(getIndex());
                 if (pedido != null) {
                     Producto producto = MYSQL.obtenerProductoPorNombre(pedido.getNombre());
-                    if (producto != null && producto.getSTOCK() + delta >= 0) {
-                        pedido.setCantidad(pedido.getCantidad() + delta);
-                        actualizarStock(producto.getNOMBRE(), -delta);
-                        if (pedido.getCantidad() <= 0) {
-                            getTableView().getItems().remove(pedido);
+                    if (producto != null) {
+                        int nuevoStock = producto.getSTOCK() - delta;
+                        if (delta > 0 && nuevoStock >= 0) { // Verificar si se puede añadir productos al pedido
+                            pedido.setCantidad(pedido.getCantidad() + delta);
+                            actualizarStock(producto.getNOMBRE(), -delta);
+                            refrescar();
+                            actualizarTotalPedido();
+                        } else if (delta < 0 && pedido.getCantidad() + delta >= 0) { // Verificar si se puede restar productos del pedido
+                            pedido.setCantidad(pedido.getCantidad() + delta);
+                            actualizarStock(producto.getNOMBRE(), -delta);
+                            if (pedido.getCantidad() <= 0) {
+                                getTableView().getItems().remove(pedido);
+                            }
+                            refrescar();
+                            actualizarTotalPedido();
+                        } else {
+                            mostrarAlerta("Error", "Stock insuficiente", "No hay suficientes productos en stock.");
                         }
-                        refrescar();
-                        actualizarTotalPedido();
                     } else {
-                        mostrarAlerta("Error", "Stock insuficiente", "No hay suficientes productos en stock.");
+                        mostrarAlerta("Error", "Producto no encontrado", "El producto seleccionado no se encontró en la base de datos.");
                     }
                 }
             }
+
 
             private void eliminarPedido() {
                 Pedido pedido = getTableView().getItems().get(getIndex());
@@ -206,19 +217,43 @@ public class ProductoClienteControlador {
         tablaPedido.refresh();
     }
 
+
     @FXML
     void añadirAPedido() {
         Producto selectedProduct = tablaproductos.getSelectionModel().getSelectedItem();
         if (selectedProduct != null && selectedProduct.getSTOCK() > 0) {
-            Pedido nuevoPedido = new Pedido(selectedProduct.getNOMBRE(), 1);
-            tablaPedido.getItems().add(nuevoPedido);
-            actualizarStock(selectedProduct.getNOMBRE(), -1);
-            refrescarTablaPedido();
-            actualizarTotalPedido();
+            // Buscar si el producto ya está en la lista de pedidos
+            boolean productoEncontrado = false;
+            for (Pedido pedido : tablaPedido.getItems()) {
+                if (pedido.getNombre().equals(selectedProduct.getNOMBRE())) {
+                    // Incrementar la cantidad del pedido existente
+                    int nuevaCantidad = pedido.getCantidad() + 1;
+                    if (selectedProduct.getSTOCK() >=0) { // Verificar stock disponible
+                        pedido.setCantidad(nuevaCantidad);
+                        actualizarStock(selectedProduct.getNOMBRE(), -1);
+                        refrescarTablaPedido();
+                        actualizarTotalPedido();
+                    } else {
+                        mostrarAlerta("Error", "Stock insuficiente", "No hay suficientes productos en stock.");
+                    }
+                    productoEncontrado = true;
+                    break;
+                }
+            }
+
+            // Si el producto no se encontró en la lista de pedidos, agregar uno nuevo
+            if (!productoEncontrado) {
+                Pedido nuevoPedido = new Pedido(selectedProduct.getNOMBRE(), 1);
+                tablaPedido.getItems().add(nuevoPedido);
+                actualizarStock(selectedProduct.getNOMBRE(), -1);
+                refrescarTablaPedido();
+                actualizarTotalPedido();
+            }
         } else {
             mostrarAlerta("Error", "Producto agotado", "No quedan productos en stock de este producto.");
         }
     }
+
 
     private void actualizarStock(String nombreProducto, int cantidad) {
         Producto producto = MYSQL.obtenerProductoPorNombre(nombreProducto);
@@ -227,11 +262,13 @@ public class ProductoClienteControlador {
             if (nuevoStock >= 0) {
                 MYSQL.actualizarStockProducto(producto.getID_DISPOSITIVO(), nuevoStock);
             } else {
-                mostrarAlerta("Error", "Stock insuficiente", "No hay suficientes productos en stock de este producto.");
+                mostrarAlerta("Error", "Stock insuficiente", "123123No hay suficientes productos en stock de este producto.");
             }
         } else {
             mostrarAlerta("Error", "Producto no encontrado", "El producto seleccionado no se encontró en la base de datos.");
         }
+        refrescarTablaPedido();
+        refrescar();
     }
 
     private void actualizarTotalPedido() {
