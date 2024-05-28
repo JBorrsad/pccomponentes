@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="645.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.ResumenPagoControlador">
-
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="645.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.ResumenPagoControlador">
     <children>
         <TableView fx:id="tablaPedido" layoutX="33.0" layoutY="66.0" prefHeight="139.0" prefWidth="399.0" style="-fx-background-color: FFFFFF; -fx-border-color: grey;">
             <columns>
@@ -29,21 +28,21 @@
         <Label layoutX="184.0" layoutY="375.0" prefHeight="17.0" prefWidth="75.0" text="Codigo postal" />
         <Label layoutX="114.0" layoutY="431.0" prefHeight="17.0" prefWidth="122.0" style="-fx-background-color: white;" text="Cuenta bancaria" />
         <Button fx:id="comprar" layoutX="378.0" layoutY="427.0" mnemonicParsing="false" onAction="#terminarpago" style="-fx-background-color: FF6000;" text="Pagar con Tarjeta" textFill="WHITE" />
-      <Label layoutX="34.0" layoutY="227.0" text="Tus datos de Facturación">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="52.0" layoutY="27.0" text="Resumen del Pedido">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="Paypal" fitHeight="27.0" fitWidth="81.0" layoutX="514.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true" />
-      <Pane layoutX="417.0" layoutY="298.0" prefHeight="73.0" prefWidth="178.0" style="-fx-background-color: LightGray; -fx-border-color: grey;">
-         <children>
-            <Label fx:id="totalpedido" layoutX="28.0" layoutY="20.0" prefHeight="33.0" prefWidth="150.0" text="Total del pedido: " />
-         </children>
-      </Pane>
+        <Label layoutX="34.0" layoutY="227.0" text="Tus datos de Facturación">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="52.0" layoutY="27.0" text="Resumen del Pedido">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <ImageView fx:id="Paypal" fitHeight="27.0" fitWidth="81.0" layoutX="514.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true" />
+        <Pane layoutX="417.0" layoutY="298.0" prefHeight="73.0" prefWidth="178.0" style="-fx-background-color: LightGray; -fx-border-color: grey;">
+            <children>
+                <Label fx:id="totalpedido" layoutX="28.0" layoutY="20.0" prefHeight="33.0" prefWidth="150.0" text="Total del pedido: " />
+            </children>
+        </Pane>
     </children>
 </Pane>

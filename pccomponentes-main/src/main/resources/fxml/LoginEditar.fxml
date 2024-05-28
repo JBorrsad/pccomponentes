@@ -30,7 +30,7 @@
       <Label layoutX="261.0" layoutY="275.0" prefHeight="17.0" prefWidth="122.0" text="Cuenta bancaria" />
       <ImageView fx:id="profile" fitHeight="122.0" fitWidth="142.0" layoutX="453.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/account.png" />
+            <Image url="@../../../../img/account.png" />
          </image></ImageView>
       <Button layoutX="463.0" layoutY="171.0" mnemonicParsing="false" onAction="#fileChooser" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: FF6000;" text="Cambiar Foto" textFill="WHITE" />
    </children>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="272.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Profile.LoginEditarOCerrar">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="367.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PCcomponentes.Profile.LoginEditarOCerrar">
    <children>
-      <Button fx:id="editar" layoutX="61.0" layoutY="61.0" mnemonicParsing="false" onAction="#handleEditar" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: FF6000;" text="Editar" textFill="WHITE" />
-      <Button fx:id="cerrar" layoutX="61.0" layoutY="123.0" mnemonicParsing="false" onAction="#handleCerrar" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: FF6000;" text="Cerrar sesión" textFill="WHITE" />
-      <Button fx:id="eliminar" layoutX="61.0" layoutY="188.0" mnemonicParsing="false" onAction="#handleEliminar" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: FF6000;" text="Eliminar" textFill="WHITE" />
+      <Button fx:id="editar" layoutX="109.0" layoutY="67.0" mnemonicParsing="false" onAction="#handleEditar" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: FF6000;" text="Editar" textFill="WHITE" />
+      <Button fx:id="cerrar" layoutX="109.0" layoutY="143.0" mnemonicParsing="false" onAction="#handleCerrar" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: FF6000;" text="Cerrar sesión" textFill="WHITE" />
+      <Button fx:id="eliminar" layoutX="109.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleEliminar" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: FF6000;" text="Eliminar" textFill="WHITE" />
    </children>
 </Pane>

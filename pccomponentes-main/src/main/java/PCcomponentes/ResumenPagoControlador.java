@@ -3,27 +3,24 @@ package PCcomponentes;
 import PCcomponentes.Login.Cookie;
 import PCcomponentes.Pedido;
 import PCcomponentes.Productos.MYSQL;
-import PCcomponentes.Profile.LoginEditarOCerrar;
 import PCcomponentes.Usuario;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.stage.Stage;
 
 public class ResumenPagoControlador {
 
@@ -52,11 +49,25 @@ public class ResumenPagoControlador {
     private ImageView Paypal;
     @FXML
     private Button comprar;
-
     @FXML
     private Label totalpedido;
 
     public void initialize() {
+        cuentabancaria.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                return;
+            }
+            if (!newValue.startsWith("ES")) {
+                cuentabancaria.setText("ES ");
+            } else {
+                String formattedText = formatCuentaBancaria(newValue);
+                if (!newValue.equals(formattedText)) {
+                    cuentabancaria.setText(formattedText);
+                    cuentabancaria.positionCaret(formattedText.length());
+                }
+            }
+        });
+
         // Configurar tabla de pedidos
         configurarTablaPedidos();
         // Mostrar datos del usuario
@@ -87,7 +98,12 @@ public class ResumenPagoControlador {
             localidad.setText(usuario.getLocalidad());
             direccion.setText(usuario.getDireccion());
             codigopostal.setText(String.valueOf(usuario.getCodigoPostal()));
-            cuentabancaria.setText(usuario.getCuentaBanco());
+            String cuentaBanco = usuario.getCuentaBanco();
+            if (cuentaBanco != null) {
+                cuentabancaria.setText(cuentaBanco);
+            } else {
+                cuentabancaria.setText("ES ");
+            }
         }
     }
 
@@ -112,26 +128,97 @@ public class ResumenPagoControlador {
         totalpedido.setText("Total del pedido: €" + String.format("%.2f", total));
     }
 
-
-
     @FXML
-    public void terminarpago(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.close();
-        mostrarAlerta("Pago realizado", "Pedido realizado!", "El pedido estará en tu casa en unos días");
+    private void handleComprar() {
+        if (isFormValid()) {
+            // Handle the payment processing logic here
+            // For example, save the order, show confirmation, etc.
+            mostrarAlerta("Éxito", "Pago realizado", "Su pago se ha realizado con éxito.", Alert.AlertType.INFORMATION);
+            vaciarPedido(); // Clear the order after successful payment
+            volverAClienteProductoControlador();
+        } else {
+            mostrarAlerta("Error", "Formulario inválido", "Por favor, complete todos los campos obligatorios con los datos correctos.", Alert.AlertType.ERROR);
+        }
     }
 
+    private boolean isFormValid() {
+        boolean valid = true;
 
+        valid &= validateField(paganombre);
+        valid &= validateField(pagaapellido);
+        valid &= validateField(provincia);
+        valid &= validateField(localidad);
+        valid &= validateField(direccion);
+        valid &= validateField(codigopostal, "\\d{5}");
+        valid &= validateField(cuentabancaria, "ES \\d{4} \\d{4} \\d{4} \\d{4}");
 
-    private void mostrarAlerta(String title, String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        return valid;
+    }
+
+    private boolean validateField(TextField field) {
+        return validateField(field, ".+");
+    }
+
+    private boolean validateField(TextField field, String regex) {
+        String text = field.getText();
+        if (text != null && text.matches(regex)) {
+            field.setStyle("-fx-border-color: green;");
+            return true;
+        } else {
+            field.setStyle("-fx-border-color: red;");
+            return false;
+        }
+    }
+
+    private void mostrarAlerta(String title, String header, String content, Alert.AlertType type) {
+        Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
     }
 
+    private String formatCuentaBancaria(String text) {
+        text = text.replaceAll("\\s", "");  // Remove all spaces
+        if (text.length() > 22) {  // Limit input length to 22 (2 for "ES" + 20 digits)
+            text = text.substring(0, 22);
+        }
+        StringBuilder formatted = new StringBuilder("ES ");
+        for (int i = 2; i < text.length(); i++) {
+            if ((i - 2) % 4 == 0 && i > 2) {
+                formatted.append(" ");
+            }
+            formatted.append(text.charAt(i));
+        }
+        return formatted.toString();
+    }
 
+    @FXML
+    public void terminarpago(ActionEvent actionEvent) {
+        if (isFormValid()) {
+            vaciarPedido(); // Clear the order after successful payment
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.close();
+            mostrarAlerta("Pago realizado", "Pedido realizado!", "El pedido estará en tu casa en unos días", Alert.AlertType.INFORMATION);
+            volverAClienteProductoControlador();
+        } else {
+            mostrarAlerta("Error", "Formulario inválido", "Por favor, complete todos los campos obligatorios con los datos correctos.", Alert.AlertType.ERROR);
+        }
+    }
 
+    private void vaciarPedido() {
+        tablaPedido.getItems().clear();
+        totalpedido.setText("Total del pedido: €0.00");
+    }
 
+    private void volverAClienteProductoControlador() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("ClienteProducto.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
